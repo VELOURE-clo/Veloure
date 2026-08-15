@@ -147,7 +147,7 @@
     // image enters view (separate from the text fade, so imagery reads as
     // the more dynamic element). clearProps hands the transform back to
     // CSS afterwards so the existing hover zoom keeps working normally.
-    var shopImages = document.querySelectorAll('.product-card__media img, .lookbook__item img, .detail-gallery__item img');
+    var shopImages = document.querySelectorAll('.product-card__media img, .lookbook__item img, .detail-gallery__item img, .unboxing__shot img');
     gsap.set(shopImages, { scale: 1.12, opacity: 0 });
     ScrollTrigger.batch(shopImages, {
       start: 'top 92%',
