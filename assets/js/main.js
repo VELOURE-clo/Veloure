@@ -127,7 +127,7 @@
       });
     });
 
-    // Subtle parallax on hero + craft background media
+    // Subtle parallax on hero background media
     document.querySelectorAll('[data-parallax-layer]').forEach(function (layer) {
       var img = layer.querySelector('img');
       if (!img) return;
@@ -143,7 +143,43 @@
       });
     });
 
-    // Product card image micro-parallax on hover handled purely in CSS.
+    // Product & lookbook photography: a distinct scale-and-reveal as each
+    // image enters view (separate from the text fade, so imagery reads as
+    // the more dynamic element). clearProps hands the transform back to
+    // CSS afterwards so the existing hover zoom keeps working normally.
+    var shopImages = document.querySelectorAll('.product-card__media img, .lookbook__item img');
+    gsap.set(shopImages, { scale: 1.12, opacity: 0 });
+    ScrollTrigger.batch(shopImages, {
+      start: 'top 92%',
+      onEnter: function (batch) {
+        gsap.to(batch, {
+          scale: 1,
+          opacity: 1,
+          duration: 1.1,
+          ease: 'power3.out',
+          stagger: 0.07,
+          clearProps: 'transform'
+        });
+      },
+      once: true
+    });
+
+    // Gentle scroll-linked drift on the product & lookbook cards themselves,
+    // alternating direction per card so scrolling through the grid feels
+    // like it has real depth. Uses the x-axis specifically so it never
+    // fights the card's own y-axis reveal-on-enter tween above.
+    document.querySelectorAll('.product-card, .lookbook__item').forEach(function (card, i) {
+      gsap.to(card, {
+        x: i % 2 === 0 ? -10 : 10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.8
+        }
+      });
+    });
   } else {
     // No GSAP / reduced motion: ensure reveal targets are simply visible.
     document.documentElement.classList.remove('js-ready');
