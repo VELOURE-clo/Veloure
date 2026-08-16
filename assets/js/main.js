@@ -81,7 +81,8 @@
       .to('.hero__title', { opacity: 1, y: 0, duration: 0.7 }, 0.2)
       .to('.hero__copy', { opacity: 1, y: 0, duration: 0.6 }, 0.4)
       .to('.hero__actions', { opacity: 1, y: 0, duration: 0.6 }, 0.5)
-      .to('.hero__meta', { opacity: 1, y: 0, duration: 0.6 }, 0.6);
+      .to('.hero__meta', { opacity: 1, y: 0, duration: 0.6 }, 0.6)
+      .to('.hero__visual', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.3);
 
     // Generic scroll reveals, staggered per parent section
     var groups = {};
