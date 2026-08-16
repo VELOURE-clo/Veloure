@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — VELOURE</title>
+<meta name="description" content="Checkout securely at VELOURE.">
+<meta name="theme-color" content="#0b0b0c">
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f0f0f'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' fill='%23c8a063' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+
+<link rel="preload" href="assets/fonts/cinzel-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jost-variable.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ MINIMAL CHECKOUT HEADER ============ -->
+<header class="site-header">
+  <div class="checkout-header">
+    <a href="index.html" class="wordmark wordmark--sm" aria-label="VELOURE home">
+      <span class="wordmark__v">V</span>ELOURE
+    </a>
+    <span class="checkout-header__secure">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5"/></svg>
+      Secure Checkout
+    </span>
+  </div>
+</header>
+
+<main id="main">
+  <section class="checkout" data-checkout>
+
+    <div class="checkout__steps">
+      <div class="checkout__step is-active" data-step-indicator="1"><span>1</span>Shipping</div>
+      <div class="checkout__step" data-step-indicator="2"><span>2</span>Payment</div>
+      <div class="checkout__step" data-step-indicator="3"><span>3</span>Review</div>
+    </div>
+
+    <div class="checkout__layout">
+      <div class="checkout__main">
+
+        <!-- STEP 1 — SHIPPING -->
+        <section class="checkout-panel" data-step="1">
+          <h1 class="checkout-panel__title">Shipping Address</h1>
+          <form data-shipping-form novalidate>
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+                <span class="field__error"></span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+              <span class="field__error"></span>
+            </div>
+            <div class="field">
+              <label for="address">Address</label>
+              <input type="text" id="address" name="address" autocomplete="address-line1" required>
+              <span class="field__error"></span>
+            </div>
+            <div class="field">
+              <label for="address2">Apartment, suite, etc. (optional)</label>
+              <input type="text" id="address2" name="address2" autocomplete="address-line2">
+              <span class="field__error"></span>
+            </div>
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" autocomplete="address-level2" required>
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="postal">Postal Code</label>
+                <input type="text" id="postal" name="postal" autocomplete="postal-code" required>
+                <span class="field__error"></span>
+              </div>
+            </div>
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label for="country">Country</label>
+                <select id="country" name="country" autocomplete="country" required>
+                  <option value="DE">Germany</option>
+                  <option value="AT">Austria</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="FR">France</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="US">United States</option>
+                  <option value="OTHER">Other</option>
+                </select>
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="phone">Phone (optional)</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel">
+                <span class="field__error"></span>
+              </div>
+            </div>
+            <div class="checkout-panel__actions">
+              <button type="submit" class="btn btn--primary btn--block"><span>Continue to Payment</span></button>
+            </div>
+          </form>
+        </section>
+
+        <!-- STEP 2 — PAYMENT -->
+        <section class="checkout-panel" data-step="2" hidden>
+          <h1 class="checkout-panel__title">Payment</h1>
+          <p class="checkout-panel__note">This is a demo checkout. No payment is processed and no card details leave your browser.</p>
+          <form data-payment-form novalidate>
+            <div class="field">
+              <label for="nameOnCard">Name on Card</label>
+              <input type="text" id="nameOnCard" name="nameOnCard" autocomplete="cc-name" required>
+              <span class="field__error"></span>
+            </div>
+            <div class="field">
+              <label for="cardNumber">Card Number</label>
+              <input type="text" id="cardNumber" name="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" maxlength="23" required>
+              <span class="field__error"></span>
+            </div>
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label for="expiry">Expiry (MM/YY)</label>
+                <input type="text" id="expiry" name="expiry" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required>
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="cvc">Security Code</label>
+                <input type="text" id="cvc" name="cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" maxlength="4" required>
+                <span class="field__error"></span>
+              </div>
+            </div>
+            <div class="checkout-panel__actions">
+              <button type="button" class="btn btn--outline" data-step-back>Back</button>
+              <button type="submit" class="btn btn--primary"><span>Review Order</span></button>
+            </div>
+          </form>
+        </section>
+
+        <!-- STEP 3 — REVIEW -->
+        <section class="checkout-panel" data-step="3" hidden>
+          <h1 class="checkout-panel__title">Review &amp; Place Order</h1>
+          <div class="review-block">
+            <div><h3>Ship To</h3><p data-review-shipping></p></div>
+            <button type="button" data-edit-step="1">Edit</button>
+          </div>
+          <div class="review-block">
+            <div><h3>Payment</h3><p data-review-payment></p></div>
+            <button type="button" data-edit-step="2">Edit</button>
+          </div>
+          <div class="checkout-panel__actions">
+            <button type="button" class="btn btn--outline" data-step-back>Back</button>
+            <button type="button" class="btn btn--primary btn--block" data-place-order>
+              <span>Place Order — <span data-review-total>€0</span></span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <aside class="checkout__summary" data-order-summary aria-label="Order summary"></aside>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <section class="checkout-panel" data-step="confirmation" hidden>
+      <div class="confirmation">
+        <span class="monogram monogram--outline" aria-hidden="true">V</span>
+        <h1 class="section-title section-title--light">Order Confirmed</h1>
+        <p class="confirmation__order-number" data-confirm-order></p>
+        <p>Thank you, <span data-confirm-name></span> — your order is confirmed. A confirmation has been sent to <span data-confirm-email></span>. Total charged: <strong data-confirm-total></strong>.</p>
+        <a href="index.html" class="btn btn--primary"><span>Continue Shopping</span></a>
+      </div>
+    </section>
+
+    <!-- EMPTY CART -->
+    <section class="checkout-panel" data-step="empty" hidden>
+      <div class="checkout-empty">
+        <p>Your bag is empty — there's nothing to check out yet.</p>
+        <a href="index.html#collection" class="btn btn--outline">Browse the Collection</a>
+      </div>
+    </section>
+
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__bottom">
+    <span class="seal" aria-hidden="true">FOR MEN WITH TASTE — VELOURE</span>
+    <p>&copy; <span id="year">2026</span> Veloure Apparel. Designed in Germany.</p>
+  </div>
+</footer>
+
+<script src="assets/js/vendor/gsap.min.js" defer></script>
+<script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/transitions.js" defer></script>
+<script src="assets/js/cart.js" defer></script>
+<script src="assets/js/checkout.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
