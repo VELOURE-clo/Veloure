@@ -1145,6 +1145,116 @@ body {
 }
 
 /* ==========================================================================
+   Silk feature — a flowing, animated brand moment (black silk drift behind
+   a warm gold panel), translating the print poster's static folds into a
+   slow, smooth, always-composited-on-transform loop.
+   ========================================================================== */
+.silk-feature {
+  position: relative;
+  overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl) var(--space-md);
+  background: var(--black);
+}
+.silk-feature__bg {
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+}
+.silk-feature__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform;
+}
+.silk-feature__blob--1 {
+  top: -10%; left: -5%;
+  width: 62vw; height: 62vw;
+  background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.07), rgba(43,5,16,0.4) 45%, transparent 72%);
+  animation: silk-drift-a 34s ease-in-out infinite alternate;
+}
+.silk-feature__blob--2 {
+  bottom: -20%; right: -10%;
+  width: 55vw; height: 55vw;
+  background: radial-gradient(circle at 60% 40%, rgba(200,160,99,0.1), rgba(15,15,15,0.5) 50%, transparent 75%);
+  animation: silk-drift-b 40s ease-in-out infinite alternate;
+}
+.silk-feature__blob--3 {
+  top: 30%; left: 40%;
+  width: 40vw; height: 40vw;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 70%);
+  animation: silk-drift-c 26s ease-in-out infinite alternate;
+}
+@keyframes silk-drift-a {
+  from { transform: translate(0, 0) rotate(0deg) scale(1); }
+  to   { transform: translate(6%, 8%) rotate(18deg) scale(1.12); }
+}
+@keyframes silk-drift-b {
+  from { transform: translate(0, 0) rotate(0deg) scale(1); }
+  to   { transform: translate(-8%, -6%) rotate(-14deg) scale(1.08); }
+}
+@keyframes silk-drift-c {
+  from { transform: translate(-6%, 0) rotate(0deg) scale(1); }
+  to   { transform: translate(4%, -10%) rotate(10deg) scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .silk-feature__blob { animation: none; }
+}
+
+.silk-feature__panel {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 460px);
+  background: var(--gold-bright);
+  color: var(--black);
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+}
+.silk-feature__word {
+  color: var(--black);
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  margin-bottom: var(--space-2xs);
+}
+.silk-feature__word .wordmark__v { color: var(--bordeaux-bright); }
+.silk-feature__script {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.8rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+}
+.silk-feature__copy {
+  font-size: 0.9rem;
+  color: rgba(15, 15, 15, 0.75);
+  max-width: 32ch;
+  margin: 0 auto var(--space-lg);
+  line-height: 1.6;
+}
+.silk-feature__divider {
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: rgba(15, 15, 15, 0.35);
+  margin: 0 auto var(--space-lg);
+}
+.silk-feature__cta {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--black);
+  border-bottom: 1px solid rgba(15, 15, 15, 0.4);
+  padding-bottom: 0.3em;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.silk-feature__cta:hover { color: var(--bordeaux-bright); border-color: var(--bordeaux-bright); }
+
+/* ==========================================================================
    Access / signup
    ========================================================================== */
 .access {
