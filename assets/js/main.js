@@ -33,10 +33,10 @@
      Product colour swatches — swap the card image (progressive enhancement;
      falls back to a static default image with no JS)
      ---------------------------------------------------------------------- */
-  document.querySelectorAll('.product-card').forEach(function (card) {
+  document.querySelectorAll('.editorial-item').forEach(function (card) {
     var swatches = card.querySelectorAll('.swatch[data-image]');
-    var img = card.querySelector('.product-card__media img');
-    var source = card.querySelector('.product-card__media source');
+    var img = card.querySelector('.editorial-item__media img');
+    var source = card.querySelector('.editorial-item__media source');
     if (!swatches.length || !img) return;
 
     swatches.forEach(function (swatch) {
@@ -100,6 +100,25 @@
       .to('.hero__copy', { opacity: 1, y: 0, duration: 0.6 }, 0.5)
       .to('.hero__actions', { opacity: 1, y: 0, duration: 0.6 }, 0.6);
 
+    // Headline "curtain rise" reveal: the masked inner span translates up
+    // into place. Runs before/independent of the generic fade-up batches.
+    var headlineLines = document.querySelectorAll('.reveal-line__inner');
+    if (headlineLines.length) {
+      ScrollTrigger.batch(headlineLines, {
+        start: 'top 90%',
+        onEnter: function (batch) {
+          gsap.to(batch, {
+            y: 0,
+            duration: 1,
+            ease: 'expo.out',
+            stagger: 0.1,
+            overwrite: true
+          });
+        },
+        once: true
+      });
+    }
+
     // Generic scroll reveals, staggered per parent section
     var groups = {};
     document.querySelectorAll('[data-reveal]').forEach(function (el) {
@@ -147,28 +166,29 @@
     // image enters view (separate from the text fade, so imagery reads as
     // the more dynamic element). clearProps hands the transform back to
     // CSS afterwards so the existing hover zoom keeps working normally.
-    var shopImages = document.querySelectorAll('.product-card__media img, .lookbook__item img, .detail-gallery__item img, .unboxing__shot img');
-    gsap.set(shopImages, { scale: 1.12, opacity: 0 });
+    var shopImages = document.querySelectorAll('.editorial-item__media img, .lookbook__item img, .detail-gallery__item img, .unboxing__shot img');
+    gsap.set(shopImages, { scale: 1.12, opacity: 0, filter: 'blur(14px)' });
     ScrollTrigger.batch(shopImages, {
       start: 'top 92%',
       onEnter: function (batch) {
         gsap.to(batch, {
           scale: 1,
           opacity: 1,
-          duration: 1.1,
+          filter: 'blur(0px)',
+          duration: 1.2,
           ease: 'power3.out',
           stagger: 0.07,
-          clearProps: 'transform'
+          clearProps: 'transform,filter'
         });
       },
       once: true
     });
 
-    // Gentle scroll-linked drift on the product & lookbook cards themselves,
-    // alternating direction per card so scrolling through the grid feels
-    // like it has real depth. Uses the x-axis specifically so it never
-    // fights the card's own y-axis reveal-on-enter tween above.
-    document.querySelectorAll('.product-card, .lookbook__item').forEach(function (card, i) {
+    // Gentle scroll-linked drift on the product cards, alternating direction
+    // per card so scrolling through the grid feels like it has real depth.
+    // Uses the x-axis specifically so it never fights the card's own
+    // y-axis reveal-on-enter tween above.
+    document.querySelectorAll('.editorial-item').forEach(function (card, i) {
       gsap.to(card, {
         x: i % 2 === 0 ? -10 : 10,
         ease: 'none',
@@ -180,6 +200,45 @@
         }
       });
     });
+
+    // Lookbook: on screens wide enough for it to feel intentional rather
+    // than cramped, pin the section and drive the horizontal track from
+    // vertical scroll (the classic "scroll-jacked" gallery). Below that
+    // width the CSS scroll-snap row (already in place, no JS needed)
+    // stays as the real, always-working interaction.
+    var lookbookSection = document.querySelector('.lookbook');
+    var lookbookViewport = document.querySelector('.lookbook__viewport');
+    var lookbookTrack = document.querySelector('.lookbook__track');
+    if (lookbookSection && lookbookViewport && lookbookTrack && window.innerWidth >= 900) {
+      lookbookSection.classList.add('lookbook--pinned');
+      var lookbookScrollTween = null;
+      var setupLookbookScroll = function () {
+        if (lookbookScrollTween) {
+          lookbookScrollTween.scrollTrigger.kill();
+          lookbookScrollTween.kill();
+          lookbookScrollTween = null;
+        }
+        var distance = lookbookTrack.scrollWidth - lookbookViewport.clientWidth;
+        if (distance <= 0) return;
+        lookbookScrollTween = gsap.to(lookbookTrack, {
+          x: -distance,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: lookbookSection,
+            start: 'top top',
+            end: '+=' + (distance + window.innerHeight * 0.4),
+            scrub: 0.6,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true
+          }
+        });
+      };
+      setupLookbookScroll();
+      window.addEventListener('load', function () {
+        ScrollTrigger.refresh();
+      });
+    }
   } else {
     // No GSAP / reduced motion: ensure reveal targets are simply visible.
     document.documentElement.classList.remove('js-ready');

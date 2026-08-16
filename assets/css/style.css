@@ -196,12 +196,27 @@ body {
 .section-title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.9rem, 1.5rem + 1.8vw, 3rem);
-  line-height: 1.15;
-  letter-spacing: 0.01em;
+  font-size: clamp(2.4rem, 1.5rem + 3.6vw, 4.75rem);
+  line-height: 1.05;
+  letter-spacing: 0.005em;
   color: var(--white);
 }
 .section-title--light { color: var(--white); }
+
+/* Line-mask headline reveal: the heading's box clips overflow, the inner
+   span starts translated below it and rises into place on scroll — a
+   "curtain rising" reveal rather than a plain fade, used for the major
+   section headlines. Falls back to fully visible with no-JS. */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+.reveal-line__inner {
+  display: block;
+}
+.js-ready .reveal-line__inner {
+  transform: translateY(105%);
+}
 
 .section-sub {
   font-size: 1.05rem;
@@ -609,7 +624,9 @@ body {
 }
 
 /* ==========================================================================
-   Collection / Product grid
+   Collection — asymmetric editorial grid (feature + offset tall + wide
+   campaign banner), image-forward with overlaid captions instead of
+   bordered "product cards".
    ========================================================================== */
 .collection {
   padding: var(--space-3xl) var(--space-md);
@@ -617,52 +634,47 @@ body {
   margin: 0 auto;
 }
 
-.product-grid {
+.editorial-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-lg);
+  gap: var(--space-2xl) 0;
 }
-@media (min-width: 700px) {
-  .product-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1080px) {
-  .product-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.product-card {
-  background: var(--black-soft);
-  border: 1px solid var(--border-hair);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  transition: border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out);
-}
-.product-card:hover {
-  border-color: var(--border-hair-strong);
-  box-shadow: 0 28px 56px -24px rgba(0, 0, 0, 0.6);
+@media (min-width: 900px) {
+  .editorial-grid {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-lg);
+    row-gap: var(--space-2xl);
+  }
+  .editorial-item--feature { grid-column: 1 / 8; }
+  .editorial-item--tall { grid-column: 8 / 13; margin-top: 4.5rem; }
+  .editorial-item--wide { grid-column: 1 / 13; }
 }
 
-.product-card__media {
+.editorial-item__media {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
+  border-radius: var(--radius-md);
   background: var(--black);
 }
-.product-card__media--wide { aspect-ratio: 4 / 3; }
-.product-card__media img {
+.editorial-item--tall .editorial-item__media { aspect-ratio: 3 / 5; }
+.editorial-item--wide .editorial-item__media { aspect-ratio: 4 / 3; }
+@media (min-width: 900px) {
+  .editorial-item--wide .editorial-item__media { aspect-ratio: 21 / 9; }
+}
+.editorial-item__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform var(--dur-slow) var(--ease-out);
 }
-.product-card:hover .product-card__media img { transform: scale(1.045); }
+.editorial-item:hover .editorial-item__media img { transform: scale(1.045); }
 
-.product-card__tag {
+.editorial-item__tag {
   position: absolute;
   top: var(--space-sm);
   left: var(--space-sm);
+  z-index: 2;
   background: var(--gold);
   color: var(--black);
   font-size: 0.62rem;
@@ -673,31 +685,71 @@ body {
   border-radius: var(--radius-sm);
 }
 
-.product-card__body {
-  padding: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+.editorial-item__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(15,15,15,0.92) 0%, rgba(15,15,15,0.35) 32%, transparent 60%);
+  pointer-events: none;
 }
-.product-card__body h3 {
+.editorial-item__scrim--side {
+  background:
+    linear-gradient(to top, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.2) 30%, transparent 55%),
+    linear-gradient(to right, rgba(15,15,15,0.55) 0%, transparent 45%);
+}
+
+.editorial-item__overlay {
+  position: absolute;
+  z-index: 2;
+  left: var(--space-md);
+  right: var(--space-md);
+  bottom: var(--space-md);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+.editorial-item__overlay h3 {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
   font-weight: 600;
   color: var(--white);
-  margin-bottom: var(--space-2xs);
 }
-.product-card__desc {
-  font-size: 0.85rem;
+.editorial-item__overlay--wide {
+  flex-direction: column;
+  align-items: flex-start;
+  right: auto;
+  max-width: 420px;
+  gap: var(--space-2xs);
+}
+.editorial-item__overlay--wide .editorial-item__desc {
+  color: rgba(237, 230, 218, 0.75);
+  margin-bottom: var(--space-sm);
+}
+.editorial-item__overlay--wide .editorial-item__row {
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.editorial-item__meta {
+  padding-top: var(--space-md);
+}
+.editorial-item__desc {
+  font-size: 0.88rem;
   color: rgba(237, 230, 218, 0.6);
   line-height: 1.6;
-  margin-bottom: var(--space-md);
-  flex: 1;
+  margin-bottom: var(--space-sm);
+}
+.editorial-item__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
 }
 
 .swatches {
   display: flex;
   gap: var(--space-2xs);
-  margin-bottom: var(--space-md);
 }
 .swatch {
   width: 22px;
@@ -715,17 +767,11 @@ body {
 .swatch--offwhite { background-color: #ded4c6; }
 .swatch--indigo { background-color: #1c2333; }
 
-.product-card__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--border-hair);
-}
-.price {
+.editorial-item__price {
   font-family: var(--font-display);
   font-size: 1.2rem;
   color: var(--gold-bright);
+  white-space: nowrap;
 }
 
 /* ==========================================================================
@@ -991,36 +1037,78 @@ body {
 }
 
 /* ==========================================================================
-   Lookbook
+   Lookbook — horizontal-scroll gallery. Base behaviour is a native
+   scroll-snap row (works everywhere, touch-friendly, no JS required); on
+   wider screens with GSAP available, main.js pins the section and drives
+   the track from vertical scroll instead (progressive enhancement).
    ========================================================================== */
 .lookbook {
-  padding: var(--space-3xl) var(--space-md);
+  padding: var(--space-3xl) 0;
+}
+.lookbook .section-head {
   max-width: var(--container);
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
 }
-.lookbook__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-sm);
+
+.lookbook__viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 var(--space-md);
+  scrollbar-width: none;
 }
-@media (min-width: 700px) {
-  .lookbook__grid { grid-template-columns: repeat(4, 1fr); }
+.lookbook__viewport::-webkit-scrollbar { display: none; }
+.lookbook--pinned .lookbook__viewport {
+  overflow: hidden;
+}
+.lookbook--pinned {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lookbook__track {
+  display: flex;
+  gap: var(--space-md);
+  width: max-content;
 }
 .lookbook__item {
+  flex: 0 0 auto;
+  width: min(76vw, 340px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+@media (min-width: 700px) {
+  .lookbook__item { width: 400px; }
+}
+.lookbook__item picture {
+  display: block;
   aspect-ratio: 3 / 4;
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--black-soft);
 }
-.lookbook__item--tall { grid-row: span 1; }
-.lookbook__item img,
-.lookbook__item picture {
+.lookbook__item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform var(--dur-slow) var(--ease-out);
 }
 .lookbook__item:hover img { transform: scale(1.06); }
+.lookbook__item figcaption {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
 
 /* ==========================================================================
    Access / signup
