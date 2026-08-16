@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VELOURE — For Men With Taste</title>
 <meta name="description" content="VELOURE. Understated luxury streetwear for men with taste. Raw indigo denim, heavyweight rib cotton, crafted in small drops.">
-<meta name="theme-color" content="#0f0f0f">
+<meta name="theme-color" content="#0b0b0c">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f0f0f'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' fill='%23c8a063' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
 
 <link rel="preload" href="assets/fonts/cinzel-600.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jost-variable.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -30,16 +30,20 @@
       <a href="#craft">Craft</a>
       <a href="#lookbook">Lookbook</a>
       <a href="#faq">FAQ</a>
-      <a href="#access">Access</a>
     </nav>
 
-    <a href="#access" class="btn btn--ghost btn--sm">
-      <span>Request Access</span>
-    </a>
-
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-actions">
+      <a href="#access" class="btn btn--ghost btn--sm">
+        <span>Join the List</span>
+      </a>
+      <button type="button" class="cart-trigger" data-cart-trigger aria-label="Open cart, empty">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span class="cart-trigger__count" data-cart-count>0</span>
+      </button>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 
   <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
@@ -47,7 +51,7 @@
     <a href="#craft">Craft</a>
     <a href="#lookbook">Lookbook</a>
     <a href="#faq">FAQ</a>
-    <a href="#access">Access</a>
+    <a href="#access">Join the List</a>
   </nav>
 </header>
 
@@ -78,7 +82,7 @@
         <a href="#collection" class="btn btn--primary">
           <span>Explore the Collection</span>
         </a>
-        <a href="#access" class="btn btn--text">Request early access →</a>
+        <a href="#lookbook" class="btn btn--text">View the Lookbook →</a>
       </div>
     </div>
 
@@ -134,7 +138,7 @@
 
       <!-- Signature Rib Tee — feature -->
       <article class="editorial-item editorial-item--feature" data-reveal>
-        <div class="editorial-item__media">
+        <a class="editorial-item__media" href="product-rib-tee.html">
           <picture>
             <source srcset="assets/img/tee-black.webp" type="image/webp">
             <img id="tee-image" src="assets/img/tee-black.jpg" loading="lazy" width="560" height="518"
@@ -146,7 +150,7 @@
             <h3>Signature Rib Tee</h3>
             <span class="editorial-item__price">€59</span>
           </div>
-        </div>
+        </a>
         <div class="editorial-item__meta">
           <p class="editorial-item__desc">300 GSM heavy rib jersey. 97% cotton / 3% elastane. Gold-embroidered V at the chest.</p>
           <div class="editorial-item__row">
@@ -155,14 +159,14 @@
               <button type="button" class="swatch swatch--bordeaux" data-image="tee-bordeaux" data-colour="Bordeaux" aria-pressed="false" aria-label="Bordeaux"></button>
               <button type="button" class="swatch swatch--offwhite" data-image="tee-offwhite" data-colour="Off White" aria-pressed="false" aria-label="Off White"></button>
             </div>
-            <a href="#access" class="btn btn--text">Enquire →</a>
+            <a href="product-rib-tee.html" class="btn btn--text">Shop Now →</a>
           </div>
         </div>
       </article>
 
       <!-- Relaxed Wide-Leg Jeans — tall, offset -->
       <article class="editorial-item editorial-item--tall" data-reveal>
-        <div class="editorial-item__media">
+        <a class="editorial-item__media" href="product-wide-leg-jeans.html">
           <picture>
             <source srcset="assets/img/jeans-flatlay.webp" type="image/webp">
             <img src="assets/img/jeans-flatlay.jpg" loading="lazy" width="545" height="1075"
@@ -173,14 +177,14 @@
             <h3>Relaxed Wide-Leg Jeans</h3>
             <span class="editorial-item__price">€79</span>
           </div>
-        </div>
+        </a>
         <div class="editorial-item__meta">
           <p class="editorial-item__desc">100% cotton raw indigo denim, 14.5oz, 3x1 right-hand twill. Mid waist, wide straight leg.</p>
           <div class="editorial-item__row">
             <div class="swatches" role="group" aria-label="Colour">
               <button type="button" class="swatch swatch--indigo is-active" aria-pressed="true" aria-label="Raw Indigo"></button>
             </div>
-            <a href="#access" class="btn btn--text">Enquire →</a>
+            <a href="product-wide-leg-jeans.html" class="btn btn--text">Shop Now →</a>
           </div>
         </div>
       </article>
@@ -188,21 +192,23 @@
       <!-- Longsleeve — full-width campaign banner -->
       <article class="editorial-item editorial-item--wide" data-reveal>
         <div class="editorial-item__media">
-          <picture>
-            <source srcset="assets/img/longsleeve.webp" type="image/webp">
-            <img src="assets/img/longsleeve.jpg" loading="lazy" width="935" height="780"
-                 alt="VELOURE Longsleeve polo, premium boxy fit, Jet Black, 100% compact cotton">
-          </picture>
-          <div class="editorial-item__scrim editorial-item__scrim--side"></div>
+          <a class="editorial-item__media-link" href="product-longsleeve.html" aria-label="Shop the Longsleeve">
+            <picture>
+              <source srcset="assets/img/longsleeve.webp" type="image/webp">
+              <img src="assets/img/longsleeve.jpg" loading="lazy" width="935" height="780"
+                   alt="VELOURE Longsleeve polo, premium boxy fit, Jet Black, 100% compact cotton">
+            </picture>
+            <div class="editorial-item__scrim editorial-item__scrim--side"></div>
+          </a>
           <div class="editorial-item__overlay editorial-item__overlay--wide">
-            <h3>Longsleeve</h3>
+            <h3><a href="product-longsleeve.html">Longsleeve</a></h3>
             <p class="editorial-item__desc">100% compact cotton, mercerized finish. Boxy, slightly cropped fit with clean branding.</p>
             <div class="editorial-item__row">
               <span class="editorial-item__price">€79</span>
               <div class="swatches" role="group" aria-label="Colour">
                 <button type="button" class="swatch swatch--black is-active" aria-pressed="true" aria-label="Jet Black"></button>
               </div>
-              <a href="#access" class="btn btn--outline btn--sm">Enquire</a>
+              <a href="product-longsleeve.html" class="btn btn--outline btn--sm">Shop Now</a>
             </div>
           </div>
         </div>
@@ -212,7 +218,7 @@
   </section>
 
   <!-- ============ CRAFT ============ -->
-  <section class="craft" id="craft">
+  <section class="craft on-paper" id="craft">
     <div class="craft__content">
       <p class="eyebrow" data-reveal>Materials &amp; Making</p>
       <h2 class="section-title section-title--light"><span class="reveal-line"><span class="reveal-line__inner">Crafted With Intention</span></span></h2>
@@ -428,7 +434,7 @@
           <span class="accordion__icon" aria-hidden="true"></span>
         </summary>
         <div class="accordion__body">
-          <p>Every Drop 01 piece runs XS–XXL. Fits are cut boxy and relaxed by design — if you're between sizes, we recommend sizing up. Reach out via <a href="#access">early access</a> and we'll help you find your size.</p>
+          <p>Every Drop 01 piece runs XS–XXL. Fits are cut boxy and relaxed by design — if you're between sizes, we recommend sizing up. Each product page has a full size guide, or reach out via our <a href="#access">mailing list</a> and we'll help you find your size.</p>
         </div>
       </details>
 
@@ -454,11 +460,11 @@
 
       <details class="accordion__item">
         <summary>
-          <span>When does Drop 01 launch?</span>
+          <span>Shipping, returns &amp; payment</span>
           <span class="accordion__icon" aria-hidden="true"></span>
         </summary>
         <div class="accordion__body">
-          <p>Drop 01 is limited and not yet open for order. <a href="#access">Request early access</a> and we'll notify you the moment it does.</p>
+          <p>Drop 01 ships worldwide from Germany, 3–7 business days depending on destination. Returns are accepted within 14 days of delivery, unworn and with tags attached. Each piece is produced in limited quantity — once a size sells out for this drop, it's gone until the next one.</p>
         </div>
       </details>
     </div>
@@ -468,10 +474,10 @@
   <section class="access" id="access">
     <div class="access__inner">
       <span class="monogram monogram--outline" aria-hidden="true">V</span>
-      <h2 class="section-title section-title--light"><span class="reveal-line"><span class="reveal-line__inner">Request Early Access</span></span></h2>
+      <h2 class="section-title section-title--light"><span class="reveal-line"><span class="reveal-line__inner">Join the List</span></span></h2>
       <p class="access__copy" data-reveal>
-        Drop 01 is limited. Leave your email and we'll notify you the moment
-        it opens — before it's gone.
+        Drop 01 is live in limited quantities. Leave your email for early word
+        on restocks, new colourways and Drop 02 — before anyone else.
       </p>
 
       <form class="access-form" id="access-form" data-reveal novalidate>
@@ -504,7 +510,7 @@
       <a href="#collection">Collection</a>
       <a href="#craft">Craft</a>
       <a href="#lookbook">Lookbook</a>
-      <a href="#access">Access</a>
+      <a href="#access">Join the List</a>
     </div>
     <div>
       <h4>Info</h4>
@@ -526,6 +532,8 @@
 
 <script src="assets/js/vendor/gsap.min.js" defer></script>
 <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/transitions.js" defer></script>
+<script src="assets/js/cart.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>
