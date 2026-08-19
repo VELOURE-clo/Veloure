@@ -1,23 +1,25 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
 type Product = {
   name: string;
+  image: string | null;
   placeholderFile: string;
   story: string;
   reverse: boolean;
 };
 
-// All three products are placeholders for now — real photography to
-// follow. Drop the matching file into /public/images/ and swap the
-// placeholder block below for an <Image src={...} /> (see git history
-// on this file for the exact pattern used before).
+// Tee and Denim are still placeholders — real photography to follow.
+// Drop the matching file into /public/images/ and set `image` below
+// (see the Longsleeve entry for the pattern).
 const PRODUCTS: Product[] = [
   {
     name: "Heavyweight Rib Tee",
+    image: null,
     placeholderFile: "/public/images/tee.jpg",
     story:
       "300 GSM Baumwoll-Rippstrick, in Deutschland konfektioniert. Kein Shirt, das sich nach dem dritten Waschgang verliert — eines, das seine Form behält.",
@@ -25,6 +27,7 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Longsleeve",
+    image: "/images/longsleeve-onmodel-front.jpg",
     placeholderFile: "/public/images/longsleeve.jpg",
     story:
       "100% mercerisierte Baumwolle, offener Rugby-Kragen, Dropped Shoulder für eine lockere Silhouette. Branding nur tonal — eine Veloure-Stickerei im Nacken, sonst nichts.",
@@ -32,6 +35,7 @@ const PRODUCTS: Product[] = [
   },
   {
     name: "Considered Denim",
+    image: null,
     placeholderFile: "/public/images/jeans.jpg",
     story:
       "14.5oz rohes Indigo-Denim, 3x1 Rechtsköper. Unbehandelt, damit die Falten mit der Zeit dir gehören und nicht der Fabrik.",
@@ -91,14 +95,25 @@ function ProductPanel({ product, index }: { product: Product; index: number }) {
           ref={imageRef}
           className="relative aspect-[4/5] w-full overflow-hidden bg-ink-charcoal md:w-1/2"
         >
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 border border-dashed border-ink-bronze/40 text-center">
-            <span className="text-xs uppercase tracking-[0.28em] text-ink-bronze">
-              Platzhalter
-            </span>
-            <span className="px-8 text-sm text-ink-stone">
-              Foto folgt — {product.placeholderFile}
-            </span>
-          </div>
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+              priority={index === 0}
+            />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 border border-dashed border-ink-bronze/40 text-center">
+              <span className="text-xs uppercase tracking-[0.28em] text-ink-bronze">
+                Platzhalter
+              </span>
+              <span className="px-8 text-sm text-ink-stone">
+                Foto folgt — {product.placeholderFile}
+              </span>
+            </div>
+          )}
         </div>
 
         <div ref={textRef} className="md:w-1/2">

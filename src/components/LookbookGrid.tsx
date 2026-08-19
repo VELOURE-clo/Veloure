@@ -18,7 +18,7 @@ const COLUMNS: { images: { src: string; alt: string }[]; offset: number }[] = [
     images: [
       { src: "/images/jeans-front.jpg", alt: "Considered Denim, Frontansicht" },
       { src: "/images/detail-embroidery.jpg", alt: "Gold-Stickerei Detail" },
-      { src: "/images/longsleeve.jpg", alt: "VELOURE Longsleeve" },
+      { src: "/images/longsleeve-onmodel-back.jpg", alt: "VELOURE Longsleeve, Rückansicht" },
     ],
   },
   {
@@ -26,6 +26,7 @@ const COLUMNS: { images: { src: string; alt: string }[]; offset: number }[] = [
     images: [
       { src: "/images/unbox-open.jpg", alt: "VELOURE Verpackung, geöffnet" },
       { src: "/images/tee-offwhite.jpg", alt: "Signature Rib Tee, Off White" },
+      { src: "/images/longsleeve-embroidery.jpg", alt: "Tonale Veloure-Stickerei im Nacken" },
     ],
   },
 ];
