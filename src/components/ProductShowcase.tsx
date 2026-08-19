@@ -27,7 +27,7 @@ const PRODUCTS: Product[] = [
     name: "Longsleeve",
     placeholderFile: "/public/images/longsleeve.jpg",
     story:
-      "100% mercerisierte Baumwolle, boxy und leicht cropped geschnitten. Klare Verarbeitung, kein überflüssiges Branding.",
+      "100% mercerisierte Baumwolle, offener Rugby-Kragen, Dropped Shoulder für eine lockere Silhouette. Branding nur tonal — eine Veloure-Stickerei im Nacken, sonst nichts.",
     reverse: true,
   },
   {
