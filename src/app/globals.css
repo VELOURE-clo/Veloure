@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink-black: #0b0b0c;
+  --color-ink-charcoal: #1c1b1a;
+  --color-ink-offwhite: #f5f2ed;
+  --color-ink-stone: #8c8781;
+  --color-ink-bronze: #b08d57;
+}
+
+@theme inline {
+  --color-ink-black: var(--color-ink-black);
+  --color-ink-charcoal: var(--color-ink-charcoal);
+  --color-ink-offwhite: var(--color-ink-offwhite);
+  --color-ink-stone: var(--color-ink-stone);
+  --color-ink-bronze: var(--color-ink-bronze);
+
+  --font-display: var(--font-archivo);
+  --font-body: var(--font-inter);
+
+  --animate-none: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  background: var(--color-ink-black);
+}
+
+body {
+  background: var(--color-ink-black);
+  color: var(--color-ink-offwhite);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-ink-bronze);
+  color: var(--color-ink-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink-bronze);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
