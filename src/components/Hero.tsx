@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { asset } from "@/lib/basePath";
 
 // Headline options — pick one, the others are kept here for reference:
 // 1. "Gewicht, das man spürt."       (Weight you can feel.)
@@ -17,7 +18,7 @@ export default function Hero() {
     >
       <div className="absolute inset-0">
         <Image
-          src="/images/tee-black.jpg"
+          src={asset("/images/tee-black.jpg")}
           alt="VELOURE heavyweight ribbed tee — placeholder hero visual"
           fill
           priority

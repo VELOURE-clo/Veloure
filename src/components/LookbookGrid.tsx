@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import { asset } from "@/lib/basePath";
 
 const COLUMNS: { images: { src: string; alt: string }[]; offset: number }[] = [
   {
@@ -84,7 +85,7 @@ export default function LookbookGrid() {
                 className="relative aspect-[3/4] w-full overflow-hidden bg-ink-charcoal"
               >
                 <Image
-                  src={img.src}
+                  src={asset(img.src)}
                   alt={img.alt}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"

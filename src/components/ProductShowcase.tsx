@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import { asset } from "@/lib/basePath";
 
 type Product = {
   name: string;
@@ -97,7 +98,7 @@ function ProductPanel({ product, index }: { product: Product; index: number }) {
         >
           {product.image ? (
             <Image
-              src={product.image}
+              src={asset(product.image)}
               alt={product.name}
               fill
               sizes="(min-width: 768px) 50vw, 100vw"

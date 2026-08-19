@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import { asset } from "@/lib/basePath";
 
 const FRAGMENTS = [
   {
@@ -104,11 +105,11 @@ export default function SignatureZoom() {
     >
       <div className="relative aspect-[4/5] w-full md:absolute md:inset-0 md:aspect-auto md:h-full">
         <div ref={wideRef} className="absolute inset-0 hidden md:block">
-          <Image src="/images/tee-black.jpg" alt="" fill sizes="100vw" className="object-cover" />
+          <Image src={asset("/images/tee-black.jpg")} alt="" fill sizes="100vw" className="object-cover" />
         </div>
         <div ref={closeRef} className="absolute inset-0">
           <Image
-            src="/images/detail-fabricswirl.jpg"
+            src={asset("/images/detail-fabricswirl.jpg")}
             alt="Nahaufnahme der schweren Rippstrick-Struktur des VELOURE Tees"
             fill
             sizes="100vw"
